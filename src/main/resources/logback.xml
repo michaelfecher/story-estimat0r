@@ -1,0 +1,25 @@
+<configuration>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>
+                [%d{"yyyy-MMM-dd'T'HH:mm:ss.SSSZ"}] [%-5level] [%thread] [%logger{36}] [%msg]%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>10000</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="CONSOLE"/>
+    </appender>
+
+
+    <logger name="de.mfe" level="INFO"/>
+    <logger name="org.apache" level="WARN"/>
+    <!-- Root level logger -->
+    <root level="${root.logging.level:-WARN}">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
